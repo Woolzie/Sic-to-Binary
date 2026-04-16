@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-//returns an array that contains the position of each bit?
 
 func Table(labels []string, cellSize []int , binary string){
   if(len(labels)!=len(cellSize)){
@@ -26,12 +25,10 @@ func Table(labels []string, cellSize []int , binary string){
 	}
 	fmt.Println()
 
-	left := 0
-	right:= 0
-	cellBegin:= 0
-	remain:=0
-	// totalBlocks := len(binary)/4
-	blockRun:=0
+	left      := 0
+	right     := 0
+	cellBegin := 0
+	remain    := 0
 
 	//TODO: add space between each half byte (for readability)
 
@@ -66,7 +63,6 @@ func Table(labels []string, cellSize []int , binary string){
 			if j>0{
 				fmt.Printf(" ")
 			}
-			blockRun++
 			left=right
 		}
 
@@ -75,8 +71,6 @@ func Table(labels []string, cellSize []int , binary string){
 
 	}
 	fmt.Println("|")
-	fmt.Println()
-
 }
 
 

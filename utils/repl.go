@@ -69,13 +69,13 @@ func parseObj(obj string){
 
 func printBin(obj string){
 	// convert to binary string and check for err in format
-	binary := make([]rune, len(obj)*4)
+	binary := make([]byte, len(obj)*4)
 	runner:=0
   for idx:= range obj{
 		bin := HexTable[rune(obj[idx])]
 
 		for s:=0; s<len(bin); s++{
-			binary[runner + s] = rune(bin[s])
+			binary[runner + s] = bin[s]
 		}
 		runner+=len(bin)
 
@@ -93,7 +93,6 @@ func printBin(obj string){
 
 		address := 20
 
-
 		if len(obj) == 6 {
 			address = 12
 		}
@@ -102,14 +101,24 @@ func printBin(obj string){
 
 		Table(labels, sizes, string(binary))
 
-		e:= 10
-		if len(binary)==24 && binary[e]==1 {
-			//TODO: this should be printed below the table
-			BinaryErr(string(binary), e, "Format 4 is specified but only 12 bits are used by the address field")
-		}
-		if len(binary)==32 && binary[e]==0 {
-			//TODO: this should be printed below the table
-			BinaryErr(string(binary), e, "Format 3 is specified but 20 bits are used by the address field")
+		b := 10
+		p := 11
+		e := 12
+
+		//NOTE: these values are hardcoded :P
+		//TODO: fix this, no hardcoding pls
+		offset_e := 44
+		offset_p := 32
+
+		//TODO: pb check should be first, print the errors only after ^~ is done printing, a flag to check wether printing ^~ is done, to be used
+		if address==12 && binary[e]=='1' {
+			BinaryErr(offset_e, "Format 4 is specified but only 12 bits are used by the address field")
+
+		} else if address==20 && binary[e]=='0' {
+			BinaryErr(offset_e, "Format 3 is specified but 20 bits are used by the address field")
+
+		}else if binary[p]=='1' && binary[b]=='1' {
+			BinaryErr(offset_p, "Cant be both pc relative and base relative")
 		}
 
 	}
