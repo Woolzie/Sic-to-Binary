@@ -91,6 +91,7 @@ func printBin(obj string){
 
 		address := 20
 
+		fmt.Println("len: ", len(obj))
 		if len(obj) == 6 {
 			address = 12
 		}
@@ -99,9 +100,9 @@ func printBin(obj string){
 
 		Table(labels, sizes, string(binary))
 
-		b := 10
-		p := 11
-		e := 12
+		b := 9
+		p := 10
+		e := 11
 
 		//NOTE: these values are hardcoded :P
 		//TODO: fix this, no hardcoding pls
