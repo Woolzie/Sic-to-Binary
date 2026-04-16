@@ -70,7 +70,7 @@ func printBin(obj string){
 	binary := make([]byte, len(obj)*4)
 	runner:=0
   for idx:= range obj{
-		bin := HexTable[rune(obj[idx])]
+		bin := HexTable[obj[idx]]
 
 		for s:=0; s<len(bin); s++{
 			binary[runner + s] = bin[s]

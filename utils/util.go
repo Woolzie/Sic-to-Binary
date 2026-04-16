@@ -1,6 +1,6 @@
 package utils
 
-var HexTable map[rune]string = map[rune]string{
+var HexTable map[byte]string = map[byte]string{
 		'0': "0000",
 		'1': "0001",
 		'2': "0010",
