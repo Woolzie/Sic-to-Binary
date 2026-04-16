@@ -22,20 +22,19 @@ func Repl(){
 		objectCodes := strings.Split(input, " ")
 
 		for obj := range objectCodes{
-			parseObj(objectCodes[obj])
+			parseObj(strings.ToLower(objectCodes[obj]))
 		}
 	}
 }
 
 func parseObj(obj string){
   
-	tempObj := strings.ToLower(obj)
-	if tempObj  == "sic" {
+	if obj  == "sic" {
 		SicEnabled = true
 		fmt.Println("Switched to SIC")
 		return
 	}
-	if tempObj =="sic/xe" || tempObj == "sicxe" {
+	if obj =="sic/xe" || obj == "sicxe" {
 		fmt.Println("Switched to SIC/XE")
 		SicEnabled = false
 		return
@@ -58,7 +57,6 @@ func parseObj(obj string){
     //check if its a number
     if(obj[i] >= '0' && obj[i]<='9'){ continue }
 		if(obj[i] >= 'a' && obj[i]<='f'){ continue }
-		if(obj[i] >= 'A' && obj[i]<='F'){ continue }
 		CharacterErr(obj, i)
 		return 
 	}
