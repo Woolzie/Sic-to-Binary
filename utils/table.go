@@ -29,6 +29,9 @@ func Table(labels []string, cellSize []int , binary string){
 	left := 0
 	right:= 0
 	cellBegin:= 0
+	remain:=0
+	// totalBlocks := len(binary)/4
+	blockRun:=0
 
 	//TODO: add space between each half byte (for readability)
 
@@ -41,17 +44,30 @@ func Table(labels []string, cellSize []int , binary string){
 		// prints the half byte value and space repeatedly
     for j:= cellSize[i]/4; j>=0; j--{
 
-			right += 4
+			if remain != 0{
+				right += remain
+			}else{
+				right += 4
+			}
+
       if right - cellBegin > cellSize[i]{
         right = cellSize[i] + cellBegin
+				if remain==0 {
+					remain = 4 - (right - left)
+				}else{
+					remain--
+				}
+				// fmt.Println("remain: ", remain)
+			}else{
+				remain=0
 			}
-
 			fmt.Printf("%s", binary[left:right])
-			if j > 0 {
+
+			if j>0{
 				fmt.Printf(" ")
 			}
-
-			left = right
+			blockRun++
+			left=right
 		}
 
 		fmt.Printf("%s", pad)
